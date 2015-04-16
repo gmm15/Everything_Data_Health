@@ -5,41 +5,14 @@ Matthew Mallick
 April 7, 2015
 '''
 
-# import module for opening URLs
-import urllib2
-# import module for working with JSON files
-import json
-# import module for command line arguments
-import sys
 
-#---------------------------------------------------------#
-
-
-# generate query url using given input parameters
-#def query(drug_name):
-
-# generate JSON dictionary using given input parameters
-def query(drug_name):
-    
-# generate JSON dictionary using given input parameters
-def query(drug_name, limit):
-
-     prefix = "https://api.fda.gov/drug/event.json?api_key=vZC1Gh1XyJl58wZKsMfJifZisDOFRsGBCij3G32v&search=patient.drug.openfda.brand_name:"
-     q = "%22"
-    return prefix + q + drug_name + q + "w"
-    
-    URL = prefix + q + drug_name + q + '&limit=' + str(limit)
-    print URL
-    j = urllib2.urlopen(URL)
-    d = json.load(j)
-    return d
  
  #---------------------------------------------------------#
  
 
 import json
  # import module for command line arguments
- import sys
+import sys
 # import module numpy for matrices
 import numpy
 
@@ -60,15 +33,15 @@ def query_count(drug_name):
  # generate JSON dictionary using given input parameters
 def query(drug_name, limit):
 def query_drug(drug_name, limit):
-     prefix = "https://api.fda.gov/drug/event.json?api_key=vZC1Gh1XyJl58wZKsMfJifZisDOFRsGBCij3G32v&search=patient.drug.openfda.brand_name:"
-     q = "%22"
+    prefix = "https://api.fda.gov/drug/event.json?api_key=vZC1Gh1XyJl58wZKsMfJifZisDOFRsGBCij3G32v&search=patient.drug.openfda.brand_name:"
+    q = "%22"
      
-     URL = prefix + q + drug_name + q + '&limit=' + str(limit)
+    URL = prefix + q + drug_name + q + '&limit=' + str(limit)
     print URL
     #print URL
-     j = urllib2.urlopen(URL)
-     d = json.load(j)
-     return d
+    j = urllib2.urlopen(URL)
+    d = json.load(j)
+    return d
  
  #---------------------------------------------------------#
  
@@ -86,7 +59,7 @@ def query_counts(drug_name, category, value):
 general_prefix = "https://api.fda.gov/drug/event.json?api_key=vZC1Gh1XyJl58wZKsMfJifZisDOFRsGBCij3G32v&search="
 
  # query user for the input (string for drug name)
- drug_name = raw_input("Drug name?: ")
+drug_name = raw_input("Drug name?: ")
  
  limit = 1
 init = query(drug_name, limit)

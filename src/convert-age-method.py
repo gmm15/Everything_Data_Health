@@ -2,7 +2,8 @@
 input: (patientonsetage, patientonsetageunit) - both strings
 output: integer containing rounded age in years
 '''
-def age_years(age, unit_code):
+# convert 50 years old to decades, years
+def age_years(age , unit_code):
     a = float(age)
     c = int(unit_code)
     ans = 0.0
