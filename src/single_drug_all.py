@@ -1,23 +1,11 @@
-'''
-Load all records associated with a single drug
-Call in command line as follows: python single-drug-all.py DRUGNAME
-Matthew Mallick
-April 7, 2015
-'''
-
-
- 
- #---------------------------------------------------------#
- 
-
 import json
  # import module for command line arguments
-import sys
+ import sys
 # import module numpy for matrices
 import numpy
 
-#---------------------------------------------------------#
-# generates a JSON library with the counts
++#---------------------------------------------------------#
++# generates a JSON library with the counts
 def query_count(drug_name):
     prefix = "https://api.fda.gov/drug/event.json?api_key=vZC1Gh1XyJl58wZKsMfJifZisDOFRsGBCij3G32v&search=patient.drug.openfda.brand_name:"
     q = "%22"
@@ -33,15 +21,15 @@ def query_count(drug_name):
  # generate JSON dictionary using given input parameters
 def query(drug_name, limit):
 def query_drug(drug_name, limit):
-    prefix = "https://api.fda.gov/drug/event.json?api_key=vZC1Gh1XyJl58wZKsMfJifZisDOFRsGBCij3G32v&search=patient.drug.openfda.brand_name:"
-    q = "%22"
+     prefix = "https://api.fda.gov/drug/event.json?api_key=vZC1Gh1XyJl58wZKsMfJifZisDOFRsGBCij3G32v&search=patient.drug.openfda.brand_name:"
+     q = "%22"
      
-    URL = prefix + q + drug_name + q + '&limit=' + str(limit)
+     URL = prefix + q + drug_name + q + '&limit=' + str(limit)
     print URL
     #print URL
-    j = urllib2.urlopen(URL)
-    d = json.load(j)
-    return d
+     j = urllib2.urlopen(URL)
+     d = json.load(j)
+     return d
  
  #---------------------------------------------------------#
  
@@ -61,7 +49,7 @@ general_prefix = "https://api.fda.gov/drug/event.json?api_key=vZC1Gh1XyJl58wZKsM
  # query user for the input (string for drug name)
 drug_name = raw_input("Drug name?: ")
  
- limit = 1
+limit = 1
 init = query(drug_name, limit)
 init = query_drug(drug_name, limit)
 counts = query_count(drug_name)
@@ -84,8 +72,8 @@ sex = raw_input("Sex (Input : ")
  # can only query 100 records at a time, so need to divide by 100 and query that many times
 data = query(drug_name, total)
 print len(data['results'])
-data = query_drug(drug_name, total)
-print len(data['results'])
+#data = query_drug(drug_name, total)
+#print len(data['results'])
  
  # process data
  '''
@@ -108,4 +96,4 @@ i.e. query by each age TYPE and count the ones that fit the right #... need to c
 +total_count = 0 # to verify the 'count' variable above
 +for i in range(num_effects):
 +    effects.append(counts['results']['term'])
-+ probs[i, 0] = counts['results']['count'] # set the P(Y) column equal to the count(y) - for now. Goin
++ probs[i, 0] = counts['results']['count'] # set the P(Y) column equal to the count(y) - for now. Going to divide by the total later
