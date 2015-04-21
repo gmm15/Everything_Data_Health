@@ -3,9 +3,9 @@ import json
 import sys
 # import module numpy for matrices
 import numpy
-from bundlebuilder import SUFFIXES
+#from bundlebuilder import SUFFIXES
 import operator
-
+import urllib2
 #---------------------------------------------------------#
 # generates a JSON library with the counts
 def query_count(drug_name):
@@ -21,17 +21,17 @@ def query_count(drug_name):
  #---------------------------------------------------------#
  
  # generate JSON dictionary using given input parameters
-def query(drug_name, limit):
+#def query(drug_name, limit):
 def query_drug(drug_name, limit):
-     prefix = "https://api.fda.gov/drug/event.json?api_key=vZC1Gh1XyJl58wZKsMfJifZisDOFRsGBCij3G32v&search=patient.drug.openfda.brand_name:"
-     q = "%22"
+    prefix = "https://api.fda.gov/drug/event.json?api_key=vZC1Gh1XyJl58wZKsMfJifZisDOFRsGBCij3G32v&search=patient.drug.openfda.brand_name:"
+    q = "%22"
      
     URL = prefix + q + drug_name + q + '&limit=' + str(limit)
     print URL
     #print URL
-     j = urllib2.urlopen(URL)
-     d = json.load(j)
-     return d
+    j = urllib2.urlopen(URL)
+    d = json.load(j)
+    return d
  
  #---------------------------------------------------------#
 
@@ -57,10 +57,10 @@ def query(urlsuffix):
 general_prefix = "https://api.fda.gov/drug/event.json?api_key=vZC1Gh1XyJl58wZKsMfJifZisDOFRsGBCij3G32v"
 
  # query user for the input (string for drug name)
- drug_name = raw_input("Drug name?: ")
+drug_name = raw_input("Drug name?: ")
  
- limit = 1
-init = query(drug_name, limit)
+limit = 1
+#init = query(drug_name, limit)
 init = query_drug(drug_name, limit)
 counts = query_count(drug_name)
 #print counts['results']
@@ -68,11 +68,12 @@ num_effects = len(counts['results'])
 print num_effects
  
  # total # of records for that drug
- total = init['meta']['results']['total'] 
+total = init['meta']['results']['total'] 
 # store a list of the effects (y)
  
 # find the # of records associated with the age, weight, sex
-sex = raw_input("Sex (Input : ")
+#lipitor
+#sex = raw_input("Sex (Input : ")
 
 sex = raw_input("Sex (Enter 1 for Male, 2 for Female): ")
 age = raw_input("Age (Enter in Years): ")
@@ -82,21 +83,21 @@ weight = raw_input("Weight (Enter in kg): ")
  
  # need to set the limit on the query = total # of records
 # can only query 100 records at a time, so need to divide by 100 and query that many times
-data = query(drug_name, total)
+data = query_drug(drug_name, limit)
 print len(data['results'])
 #data = query_drug(drug_name, total)
 #print len(data['results'])
  
  # process data
- '''
+'''
 analyze data here
 '''
-Naive Bayes Algorithm
-P(X|Y)= P(X and Y) + 1 / P(Y) - with Laplace smoothing
-P(age|effect) = (P(age & effect) + 1) / P(effect) = # that are that age and had the effect / total # with that effect
-NOTE: for ages, all the ages have specific units so need to convert them to years
-i.e. query by each age TYPE and count the ones that fit the right #... need to convert from year > whatever the unit is and then query for that age
-'''
+#Naive Bayes Algorithm
+#P(X|Y)= P(X and Y) + 1 / P(Y) #- with Laplace smoothing
+#P(age|effect) = (P(age & effect) + 1) / P(effect) #=  that are that age and had the effect / total # with that effect
+#NOTE: for ages, all the ages have specific units so need to convert them to years
+#i.e. query by each age TYPE and count the ones that fit the right #... need to convert from year > whatever the unit is and then query for that age
+#'''
 
 # initialize the probability matrix
 # rows = each effect (each y)
